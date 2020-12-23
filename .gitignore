@@ -1,0 +1,16 @@
+# Ignore IDE specific settings files
+.vscode/
+
+# Ignore compiled and unwanted folders and files from pyinstaller
+__pycache__/
+build/
+dist/
+*.pyo
+ServerForge.spec
+
+# Ignore note files
+note.*
+dev-notes.md
+
+# Ignore GIMP photoshop files
+*.xcf
