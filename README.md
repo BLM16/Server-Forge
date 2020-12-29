@@ -7,13 +7,49 @@
 
 ![](./public/Banner.png)
 
-Author: [Bradley Myers](https://github.com/BLM16/)
+Developer: [Bradley Myers](https://github.com/BLM16/)
  
-Date created: 23-11-2020 | Last updated: 23-12-2020
+Date created: 23-11-2020 | Last updated: 29-12-2020
 
 ---
 
-**Server Forge** is a tool to automate Minecraft Server file generation. It compiles the provided server information into the required files for a Minecraft server. *Featuring a simple UI, and eventually command line accesability*, it is an easy tool to use that saves you the effort of editing property files and lets you spend your time playing, not messing with server settings.
+**Server Forge** is a tool to automate Minecraft Server file generation. It compiles the provided server information into the required files for a Minecraft server. *Featuring a simple UI, and eventually command line accessibility*, it is an easy tool to use that saves you the effort of editing property files and lets you spend your time playing, not messing with server settings.
+
+**For more detailed information, please look at the [wiki](https://github.com/BLM16/Server-Forge/wiki).**
+
+## Setup and Overview
+**Make sure you have python 3 installed, and added to path.**
+
+Server Forge uses the following folder structure:
+
+| Folder / File                       |  Overview                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| [public](./public)                  | Assets used outside of the project go here such as the banner and icon used in this readme. |
+| [Server Forge](./Server%20Forge)    | All code and related assets go here such as the [UI](./Server%20Forge/UI) scripts and the [favicon](./Server%20Forge/assets/Favicon.ico) used in those windows. The server file [templates](./Server%20Forge/templates) also reside here. |
+| [Main.py](./Server%20Forge/Main.py) | This is the main file for the project. It handles rendering the GUIs in order, storing server information, and creating server files. |
+| [sf.bat](./sf.bat)                  | This batch file has premade scripts to help with compiling the project. This is the equivalent to a makefile. For more info on how to use it, click [here](https://github.com/BLM16/Server-Forge/wiki/sf.bat-usage). |
+
+Server Forge uses Tkinter for the GUI. Tkinter comes preinstalled with python and it allows you to create simple GUIs, which we use in this project to have a visual way for users to provide server information. For more information on tkinter, look at [python's docs](https://docs.python.org/3/library/tkinter.html).
+
+## Compiling and Distribution
+
+To build the Server Forge app into an exe file, you need pyinstaller. To install pyinstaller, run the following command in a terminal.
+
+```bat
+pip install pyinstaller
+```
+
+Once pyinstaller is installed, you can use the premade scripts in [sf.bat](./sf.bat). To build the app in development/debug mode run the following command in a terminal from the root of this project, or by specifying the path to the batch file:
+
+```bat
+sf devbuild
+```
+
+To build the app for distribution without debug info, use this command:
+
+```bat
+sf build
+```
 
 ## License
 This game is licensed under the [MIT License](./LICENSE)
