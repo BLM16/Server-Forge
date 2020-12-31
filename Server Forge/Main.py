@@ -1,4 +1,4 @@
-from UI import ServerInit, ServerConfig, ServerMotd
+from UI import ServerInit, ServerConfig, ServerMotd, ServerExtras
 import os, sys
 
 # Get the current directory of this app for use with writting server files
@@ -20,10 +20,17 @@ class Server:
         serverConfigData = ServerConfig.Interface(self.name).Render()
         self.gamemode = serverConfigData["GAME_MODE"]
         self.difficulty = serverConfigData["DIFFICULTY"]
+        self.hardcore = serverConfigData["HARDCORE"]
 
         self.motd = ServerMotd.Interface(self.name).Render()
 
-        del serverInitData, serverConfigData
+        serverExtrasData = ServerExtras.Interface(self.name).Render()
+        self.force_gamemode = serverExtrasData["FORCE_GAMEMODE"]
+        self.spawn_monsters = serverExtrasData["SPAWN_MONSTERS"]
+        self.pvp = serverExtrasData["PVP"]
+        self.command_block = serverExtrasData["COMMAND_BLOCK"]
+
+        del serverInitData, serverConfigData, serverExtrasData
 
     def CreateDirectory(self):
         """Creates the directory for the server files to be written to"""
@@ -67,8 +74,13 @@ class Server:
                 f.write(
                     tmp.read()
                         # Replace the 'template values'
+                        .replace("|FORCE_GAMEMODE|", self.force_gamemode)
                         .replace("|GAMEMODE|", self.gamemode)
                         .replace("|DIFFICULTY|", self.difficulty)
+                        .replace("|SPAWN_MONSTERS|", self.spawn_monsters)
+                        .replace("|PVP|", self.pvp)
+                        .replace("|HARDCORE|", self.hardcore)
+                        .replace("|COMMAND_BLOCK|", self.command_block)
                         .replace("|SERVER_NAME|", self.name)
                         .replace("|MOTD|", self.motd)
                 )

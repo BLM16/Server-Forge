@@ -23,6 +23,7 @@ class Interface:
         self.window.iconbitmap(os.path.join(CURRENT_DIR, os.pardir, "assets", "Favicon.ico"))
         self.window.minsize(500, 200)
         self.window.maxsize(500, 200)
+        self.window.protocol("WM_DELETE_WINDOW", lambda: quit())
 
         # Set up tkinter frames
         self.mainFrame = ttk.Frame(self.window, width = 100, height = 90)
@@ -35,10 +36,11 @@ class Interface:
         serverMotd = self.txtMotd.get()
 
         # Ensure all required data was collected
-        # Exit window loop to proceed
+        # Exit the window
         if serverMotd:
             self.MOTD = serverMotd
             self.window.quit()
+            self.window.destroy()
 
         del serverMotd
 
@@ -57,7 +59,5 @@ class Interface:
         ttk.Button(self.optionsFrame, text = "Next", command = self.next).pack()
 
         self.window.mainloop()
-
-        self.window.destroy()
 
         return self.MOTD

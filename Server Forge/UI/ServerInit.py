@@ -24,6 +24,7 @@ class Interface:
         self.window.iconbitmap(os.path.join(CURRENT_DIR, os.pardir, "assets", "Favicon.ico"))
         self.window.minsize(500, 200)
         self.window.maxsize(500, 200)
+        self.window.protocol("WM_DELETE_WINDOW", lambda: quit())
 
         # Set up tkinter frames
         self.mainFrame = ttk.Frame(self.window, width = 100, height = 90)
@@ -36,10 +37,11 @@ class Interface:
         serverName = self.txtServerName.get()
 
         # Ensure all required data was collected
-        # Exit the window loop to proceed
+        # Exit the window
         if serverName and self.SERVER_SAVE_DIR:
             self.SERVER_NAME = serverName
             self.window.quit()
+            self.window.destroy()
 
         del serverName
 
@@ -80,8 +82,6 @@ class Interface:
         ttk.Button(self.optionsFrame, text = "Next", command = self.next).pack()
 
         self.window.mainloop()
-        
-        self.window.destroy()
 
         data = {
             "SERVER_NAME": self.SERVER_NAME,
