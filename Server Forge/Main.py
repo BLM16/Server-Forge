@@ -1,4 +1,4 @@
-from UI import ServerInit, ServerConfig, ServerMotd, ServerExtras
+from UI import ServerInit, ServerConfig, ServerMotd, ServerExtras, ServerSecurity
 import os, sys
 
 # Get the current directory of this app for use with writting server files
@@ -30,7 +30,13 @@ class Server:
         self.pvp = serverExtrasData["PVP"]
         self.command_block = serverExtrasData["COMMAND_BLOCK"]
 
-        del serverInitData, serverConfigData, serverExtrasData
+        serverSecurityData = ServerSecurity.Interface(self.name).Render()
+        self.enforce_whitelist = serverSecurityData["ENFORCE_WHITELIST"]
+        self.online_mode = serverSecurityData["ONLINE_MODE"]
+        self.max_players = serverSecurityData["MAX_PLAYERS"]
+        self.port = serverSecurityData["PORT"]
+
+        del serverInitData, serverConfigData, serverExtrasData, serverSecurityData
 
     def CreateDirectory(self):
         """Creates the directory for the server files to be written to"""
@@ -75,13 +81,17 @@ class Server:
                     tmp.read()
                         # Replace the 'template values'
                         .replace("|FORCE_GAMEMODE|", self.force_gamemode)
+                        .replace("|ENFORCE_WHITELIST|", self.enforce_whitelist)
                         .replace("|GAMEMODE|", self.gamemode)
                         .replace("|DIFFICULTY|", self.difficulty)
                         .replace("|SPAWN_MONSTERS|", self.spawn_monsters)
                         .replace("|PVP|", self.pvp)
                         .replace("|HARDCORE|", self.hardcore)
                         .replace("|COMMAND_BLOCK|", self.command_block)
+                        .replace("|MAX_PLAYERS|", self.max_players)
+                        .replace("|PORT|", self.port)
                         .replace("|SERVER_NAME|", self.name)
+                        .replace("|ONLINE_MODE|", self.online_mode)
                         .replace("|MOTD|", self.motd)
                 )
 
