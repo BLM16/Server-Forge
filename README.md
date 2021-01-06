@@ -58,4 +58,4 @@ sf build
 ```
 
 ## License
-This game is licensed under the [MIT License](./LICENSE)
+This tool is licensed under the [MIT License](./LICENSE)
