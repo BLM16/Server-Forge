@@ -9,7 +9,7 @@
 
 Developer: [Bradley Myers](https://github.com/BLM16/)
 
-Date created: 23-11-2020 | Last updated: 30-12-2020
+Date created: 2020-11-23 | Last updated: 2021-02-21
 
 ---
 
@@ -20,7 +20,7 @@ Date created: 23-11-2020 | Last updated: 30-12-2020
 ## Setup and Overview
 **Make sure you have python 3 installed, and added to path.**
 
-To get the latest [server.jar.template](./Server%20Forge/templates/server.jar.template), click [here](https://www.minecraft.net/en-us/download/server) and download the latest .jar file. Save the file to the [templates directory](./Server%20Forge/templates) as "server.jar.template".
+To download the latest server.jar file, click [here](https://www.minecraft.net/en-us/download/server).
 
 Make sure you are in complience with the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula).
 
@@ -32,7 +32,7 @@ Server Forge uses the following folder structure:
 | ----------------------------------- | ------------------------------------------------------------------------------------------- |
 | [public](./public)                  | Assets used outside of the project go here such as the banner and icon used in this readme. |
 | [Server Forge](./Server%20Forge)    | All code and related assets go here such as the [UI](./Server%20Forge/UI) scripts and the [favicon](./Server%20Forge/assets/Favicon.ico) used in those windows. The server file [templates](./Server%20Forge/templates) also reside here. |
-| [Main.py](./Server%20Forge/Main.py) | This is the main file for the project. It handles rendering the GUIs in order, storing server information, and creating server files. |
+| [Server Forge/Main.py](./Server%20Forge/Main.py) | This is the main file for the project. It handles rendering the GUIs in order, storing server information, and creating server files. |
 | [sf.bat](./sf.bat)                  | This batch file has premade scripts to help with compiling the project. This is the equivalent to a makefile. For more info on how to use it, click [here](https://github.com/BLM16/Server-Forge/wiki/sf.bat-usage). |
 
 Server Forge uses Tkinter for the GUI. Tkinter comes preinstalled with python and it allows you to create simple GUIs, which we use in this project to have a visual way for users to provide server information. For more information on tkinter, look at [python's docs](https://docs.python.org/3/library/tkinter.html).

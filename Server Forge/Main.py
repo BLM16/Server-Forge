@@ -16,6 +16,7 @@ class Server:
         serverInitData = ServerInit.Interface().Render()
         self.name = serverInitData["SERVER_NAME"]
         self.saveDir = serverInitData["SERVER_SAVE_DIR"]
+        self.jar_file = serverInitData["JAR_FILE"]
 
         serverConfigData = ServerConfig.Interface(self.name).Render()
         self.gamemode = serverConfigData["GAME_MODE"]
@@ -71,12 +72,12 @@ class Server:
 
         # server.jar
         with open(os.path.join(self.dir, "server.jar"), "wb") as f:
-            with open(os.path.join(CURRENT_DIR, "templates", "server.jar.template"), "rb") as tmp:
+            with open(self.jar_file, "rb") as tmp:
                 f.write(tmp.read())
 
         # server.properties
         with open(os.path.join(self.dir, "server.properties"), "w") as f:
-            with open(os.path.join(CURRENT_DIR, "templates", "server.properties.template"), "r") as tmp:
+            with open(os.path.join(CURRENT_DIR, "assets", "server.properties.template"), "r") as tmp:
                 f.write(
                     tmp.read()
                         # Replace the 'template values'

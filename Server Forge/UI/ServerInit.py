@@ -17,6 +17,7 @@ class Interface:
         # Variables to store data collected from this interface
         self.SERVER_NAME = ""
         self.SERVER_SAVE_DIR = ""
+        self.JAR_FILE = ""
         
         # Set up the window
         self.window = tkinter.Tk()
@@ -45,23 +46,32 @@ class Interface:
 
         del serverName
 
-    def showFileDialog(self):
+    def showFileDialog(self, target):
         """Shows the file dialog to choose where to save the server folder"""
 
-        # Show file dialogue for user to select where to save their server to
-        serverSaveDir = filedialog.askdirectory()
+        # Show file dialogue for folder / file depending on target
+        if target == "server":
+            choice = filedialog.askdirectory()
+        elif target == "jar":
+            choice = filedialog.askopenfilename(filetypes = [("Jar Files", "*.jar")])
 
-        # Verify they chose a folder (didn't close the file dialogue manually)
-        # Display the save directory in a disabled textbox
-        if serverSaveDir:
-            lblSaveLocation = ttk.Entry(self.mainFrame, width = 50)
-            lblSaveLocation.insert(0, serverSaveDir)
-            lblSaveLocation.configure(state = tkinter.DISABLED)
-            lblSaveLocation.grid(row = 1, column = 1)
+        # Verify they chose a folder / file (didn't close the file dialogue manually)
+        # Display the choice in a disabled textbox
+        if choice:
+            if target == "server":
+                row = col = 1
+                self.SERVER_SAVE_DIR = choice
+            elif target == "jar":
+                row = 2
+                col = 1
+                self.JAR_FILE = choice
 
-            self.SERVER_SAVE_DIR = serverSaveDir
+            lbl = ttk.Entry(self.mainFrame, width = 50)
+            lbl.insert(0, choice)
+            lbl.configure(state = tkinter.DISABLED)
+            lbl.grid(row = row, column = col)
 
-        del serverSaveDir
+        del choice
 
     def Render(self):
         """Renders the interface"""
@@ -73,9 +83,11 @@ class Interface:
         self.txtServerName = ttk.Entry(self.mainFrame, width = 50)
         self.txtServerName.grid(row = 0, column = 1)
 
-        ttk.Label(self.mainFrame, text = "Location:").grid(row = 1, column = 0)
+        ttk.Label(self.mainFrame, text = "Server Location:").grid(row = 1, column = 0)
+        ttk.Button(self.mainFrame, text = "Browse", command = lambda: self.showFileDialog("server")).grid(row = 1, column = 2)
 
-        ttk.Button(self.mainFrame, text = "Browse", command = self.showFileDialog).grid(row = 1, column = 2)
+        ttk.Label(self.mainFrame, text = "Jar File:").grid(row = 2, column = 0)
+        ttk.Button(self.mainFrame, text = "Browse", command = lambda: self.showFileDialog("jar")).grid(row = 2, column = 2)
 
         self.optionsFrame.pack(side = tkinter.BOTTOM)
 
@@ -85,7 +97,8 @@ class Interface:
 
         data = {
             "SERVER_NAME": self.SERVER_NAME,
-            "SERVER_SAVE_DIR": self.SERVER_SAVE_DIR
+            "SERVER_SAVE_DIR": self.SERVER_SAVE_DIR,
+            "JAR_FILE": self.JAR_FILE
         }
 
         return data

@@ -21,8 +21,7 @@ GOTO ERR
     ECHO Building Program
     
     pyinstaller "Server Forge/Main.py" --name="ServerForge" --icon="Server Forge/assets/Favicon.ico" ^
-        --add-data "Server Forge/assets/Favicon.ico;assets" ^
-        --add-data "Server Forge/templates;templates" ^
+        --add-data "Server Forge/assets;assets" ^
         --onefile --windowed ^
         --clean
 
@@ -34,8 +33,7 @@ GOTO ERR
     ECHO Building Program - Dev Mode
 
     pyinstaller "Server Forge/Main.py" --name="ServerForge" --icon="Server Forge/assets/Favicon.ico" ^
-        --add-data "Server Forge/assets/Favicon.ico;assets" ^
-        --add-data "Server Forge/templates;templates" ^
+        --add-data "Server Forge/assets;assets" ^
         --onefile --windowed ^
         --debug=all --log-level=DEBUG ^
         --clean
